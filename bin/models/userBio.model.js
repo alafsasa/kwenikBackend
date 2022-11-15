@@ -10,7 +10,8 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         country: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            defaultValue: 'kenya'
         }
     });
     return UserBio;
