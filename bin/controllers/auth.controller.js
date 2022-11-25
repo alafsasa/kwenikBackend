@@ -7,13 +7,30 @@ const bcrypt = require('bcrypt');
 exports.signup = async (req, res) => {
     try{
         //
-        const { userbios } = req.body;
-        console.log(userbios.email)
-        console.log(userbios.password);
-        console.log(userbios.town);
-        //console.log(userbios.country)
+        const { email, password, town, country } = req.body;
+        //check for empty fields
+        if(!email && password && town){
+            req.status(400).send("Form fields cannot be empty!");
+            return;
+        }
+        //create user
+        //save user data to the db
+        //encrypt password
+        const encryptedPassword = await bcrypt.hashSync(password, 10);
+        await User.create({
+            email,
+            password: encryptedPassword,
+            town,
+            country
+        }).then(()=>{
+            res.status(200).send("User registered successfully!");
+        }).catch((error)=>{
+            res.status(400).send({
+                message: error.message
+            })
+        })
 
     }catch(err){
-        res.status(400).send(err);
+        res.status(500).send(err);
     }
 };
