@@ -1,4 +1,5 @@
 const controller = require('../controllers/auth.controller');
+const verifyUserData = require('../middlewares/verifyUserData');
 
 module.exports = function(app){
     app.use(function(res, req, next){
