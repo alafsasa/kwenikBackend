@@ -10,6 +10,9 @@ module.exports = function(app){
     });
     app.post(
         "/api/auth/signup",
+        [
+            verifyUserData.checkDuplicateUssernameEmail
+        ],
         controller.signup
     );
 }
