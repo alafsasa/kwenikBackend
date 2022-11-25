@@ -8,11 +8,6 @@ exports.signup = async (req, res) => {
     try{
         //
         const { email, password, town, country } = req.body;
-        //check for empty fields
-        if(!email && password && town){
-            req.status(400).send("Form fields cannot be empty!");
-            return;
-        }
         //create user
         //save user data to the db
         //encrypt password
